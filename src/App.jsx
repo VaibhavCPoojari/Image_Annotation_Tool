@@ -965,12 +965,16 @@ function App() {
                 {/* Annotation List */}
                 <aside className="annotation-list panel">
                   <h2>Annotations</h2>
+                  {activeImage?.annotations.length === 0 && (
+                    <div className="panel-empty">No annotations yet.</div>
+                  )}
                   {activeImage?.annotations.map((item, index) => (
-                    <div key={item.id}>
-                      #{index + 1} {item.className}
-                      <button onClick={() => removeAnnotation(item.id)}>
-                        Delete
-                      </button>
+                    <div key={item.id} className={"annotation-row" + (selectedAnnotationId === item.id ? " selected" : "")}
+                      style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, marginBottom: 8, padding: 8, border: '1px solid #e2e8f0', borderRadius: 8, background: '#f8fafc', cursor: 'pointer' }}
+                      onClick={() => setSelectedAnnotationId(item.id)}
+                    >
+                      <span style={{ fontWeight: 500, color: '#1e293b' }}>#{index + 1} <span style={{ color: '#2563eb' }}>{item.className}</span></span>
+                      <button style={{ height: 30, borderRadius: 7, background: '#fff', border: '1px solid #e2e8f0', color: '#dc2626', fontWeight: 600, cursor: 'pointer', padding: '0 12px' }} onClick={e => { e.stopPropagation(); removeAnnotation(item.id); }}>Delete</button>
                     </div>
                   ))}
                 </aside>
@@ -1114,12 +1118,16 @@ function App() {
                 {/* Annotation List in Modal */}
                 <aside className="annotation-list panel" style={{ minWidth: 220, maxWidth: 320, marginLeft: 12, flex: '0 0 260px', overflowY: 'auto' }}>
                   <h2>Annotations</h2>
+                  {fullscreenImage.annotations.length === 0 && (
+                    <div className="panel-empty">No annotations yet.</div>
+                  )}
                   {fullscreenImage.annotations.map((item, index) => (
-                    <div key={item.id}>
-                      #{index + 1} {item.className}
-                      <button onClick={() => removeAnnotation(item.id)}>
-                        Delete
-                      </button>
+                    <div key={item.id} className={"annotation-row" + (selectedAnnotationId === item.id ? " selected" : "")}
+                      style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8, marginBottom: 8, padding: 8, border: '1px solid #e2e8f0', borderRadius: 8, background: '#f8fafc', cursor: 'pointer' }}
+                      onClick={() => setSelectedAnnotationId(item.id)}
+                    >
+                      <span style={{ fontWeight: 500, color: '#1e293b' }}>#{index + 1} <span style={{ color: '#2563eb' }}>{item.className}</span></span>
+                      <button style={{ height: 30, borderRadius: 7, background: '#fff', border: '1px solid #e2e8f0', color: '#dc2626', fontWeight: 600, cursor: 'pointer', padding: '0 12px' }} onClick={e => { e.stopPropagation(); removeAnnotation(item.id); }}>Delete</button>
                     </div>
                   ))}
                 </aside>
