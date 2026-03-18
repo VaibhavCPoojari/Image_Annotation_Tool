@@ -1,0 +1,11 @@
+services:
+  annotation-tool:
+    container_name: annotation-tool
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      APP_PUBLIC_URL: http://localhost:8080
+    ports:
+      - "8080:80"
+    restart: unless-stopped
